@@ -6,6 +6,5 @@ We picked two subjects among the three subjects proposed:
 
 The other **README** and **INSTALL** files will be found in Project#X folders, as they are specific for each homework.
 
-### Notes
-
+#### Note
 - The **AUTHORS** and **LICENCE** files remain unchanged and are applicable to both projects.
