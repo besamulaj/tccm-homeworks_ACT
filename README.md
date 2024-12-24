@@ -1,16 +1,11 @@
-This repository contains the subjects proposed for the homework of the
-advanced computational techniques.
+This repository contains the homework subjects of the **Advanced Computational Techniques** course, **AUTHORS**, **LICENCE**, and a **README**.md file.
 
-You should pick two subjects among the three subjects below:
-- Project #1: HF and MP2 energy in C
-- Project #2: Sparse matrices in Fortran
-- Project #3: Molecular dynamics in C or Fortran
+We picked two subjects among the three subjects proposed:
+- Project #2: **Sparse matrices in Fortran**
+- Project #3: **Molecular Dynamics in C**
 
-You must fork this repository and create your files in the `project*`
-directory. Don't forget to `git add` your files, and make some frequent commits
-and `git push` to your fork.
-When you are done (or when the time limit is reached), you will make a pull-request
-of your fork to our GitHub repository.
+The other **README** and **INSTALL** files will be found in Project#X folders, as they are specific for each homework.
 
-If you need help with the creation of your GitHub token, read the inscructions given in the [token.pdf](token.pdf) file
+### Notes
 
+- The **AUTHORS** and **LICENCE** files remain unchanged and are applicable to both projects.
