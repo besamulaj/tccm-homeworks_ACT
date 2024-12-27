@@ -23,4 +23,10 @@ void compute_distances(size_t Natoms, double** coord, double** distance) {
             }
         }
     }
+    printf("Computed Distances:\n");
+    for (size_t i = 0; i < Natoms; i++) {
+        for (size_t j = 0; j < Natoms; j++) {
+            printf("Distance[%zu][%zu] = %.10f\n", i, j, distance[i][j]);
+        }
+    }
 }
