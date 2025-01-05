@@ -1,13 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "memory.c"         
-#include "readinput.c"      
-#include "distances.c"      
-#include "lj_potential.c"  
-#include "energies.c"      
-#include "acceleration.c"   
-#include "verlet.c"     
+#include "memory.h"         
+#include "readinput.h"      
+#include "distances.h"      
+#include "lj_potential.h"  
+#include "energies.h"      
+#include "acceleration.h"   
+#include "verlet.h"     
 
 #define MAX_STEPS 1000  // total number of steps for the simulation
 #define TIME_STEP 0.2   // time step for the simulation
