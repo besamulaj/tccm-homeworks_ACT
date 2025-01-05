@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 // Verlet algorithm for molecular dynamics
-void verlet(size_t Natoms, double** coord, double** velocity, double** acceleration, double* mass, double dt, size_t steps, FILE* output_file) {
+void verlet(size_t Natoms, double** coord, double** velocity, double** acceleration, double dt, size_t steps, FILE* output_file) {
     for (size_t step = 0; step < steps; step++) {
         // Update positions
         for (size_t i = 0; i < Natoms; i++) {
@@ -10,15 +10,6 @@ void verlet(size_t Natoms, double** coord, double** velocity, double** accelerat
                 coord[i][k] += velocity[i][k] * dt + 0.5 * acceleration[i][k] * dt * dt;
             }
         }
-
-        // Half-step velocity update
-        for (size_t i = 0; i < Natoms; i++) {
-            for (int k = 0; k < 3; k++) {
-                velocity[i][k] += 0.5 * acceleration[i][k] * dt;
-            }
-        }
-
-        // Recompute accelerations (use `compute_acc` function here)
 
         // Final velocity update
         for (size_t i = 0; i < Natoms; i++) {
