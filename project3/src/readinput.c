@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "memory.c" 
 
 //function for reading the number of atoms
 size_t read_Natoms(FILE* input_file) {
