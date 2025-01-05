@@ -63,6 +63,21 @@ int main(int argc, char* argv[]) {
     double sigma = 0.3345;   // Lennard-Jones parameter σ in nm
     compute_acc(Natoms, coord, mass, distance, acceleration, epsilon, sigma);
 
+    // Compute pairwise distances
+    compute_distances(Natoms, coord, distance);
+ 
+    // Compute potential energy
+    double potential_energy = V(EPSILON, SIGMA, Natoms, distance);
+ 
+    // Compute kinetic energy
+    double kinetic_energy = T(Natoms, velocity, mass);
+ 
+    // Check if the total energy is conserved
+    double total_energy = potential_energy + kinetic_energy;
+ 
+    // Compute accelerations
+    compute_acc(Natoms, coord, mass, distance, acceleration, EPSILON, SIGMA);
+
     // Run molecular dynamics simulation with Verlet algorithm
     verlet(Natoms, coord, velocity, acceleration, mass, TIME_STEP, MAX_STEPS, output_file);
 
