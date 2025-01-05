@@ -11,8 +11,3 @@ double T(size_t Natoms, double** velocity, double* mass) {
     }
     return kinetic_energy;
 }
-
-//to compute total energy
-double E(double T, double V) {
-    return T + V;
-}
