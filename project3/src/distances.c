@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stddef.h>
+#include "memory.c" 
 
 // Function for computing distances between atoms
 void compute_distances(size_t Natoms, double** coord, double** distance) {
