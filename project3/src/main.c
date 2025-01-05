@@ -1,4 +1,4 @@
-#include "memory.h"         
+#include "memory.c"         
 #include "readinput.h"      
 #include "distances.h"      
 #include "lj_potential.h"  
@@ -8,6 +8,8 @@
 
 #define MAX_STEPS 1000  // total number of steps for the simulation
 #define TIME_STEP 0.2   // time step for the simulation
+#define EPSILON 0.0661 // Depth of the Lennard-Jones potential well (in J/mol)
+#define SIGMA 0.3345   // Distance at which the potential is zero (in nm)
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
