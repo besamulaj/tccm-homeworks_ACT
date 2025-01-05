@@ -12,7 +12,7 @@ program test_sparse_multiply
   count = 4
  
   ! Call the sparse matrix multiplication subroutine
-  call sparse_multiply(rows, cols, values, result_rows, result_cols, result_values, count, result_count)
+  call multiply_sparse_matrix(rows, cols, values, result_rows, result_cols, result_values, count, result_count)
  
   ! Print the results
   print *, "Result Matrix (Sparse Format):"
@@ -20,7 +20,7 @@ program test_sparse_multiply
  
 contains
  
-  subroutine sparse_multiply(rows, cols, values, result_rows, result_cols, result_values, count, result_count)
+  subroutine multiply_sparse_matrix(rows, cols, values, result_rows, result_cols, result_values, count, result_count)
     implicit none
     integer, intent(in) :: rows(:), cols(:), count
     real(8), intent(in) :: values(:)
@@ -49,7 +49,7 @@ contains
     result_rows(1:result_count) = temp_rows(1:result_count)
     result_cols(1:result_count) = temp_cols(1:result_count)
     result_values(1:result_count) = temp_values(1:result_count)
-  end subroutine sparse_multiply
+  end subroutine multiply_sparse_matrix
  
   subroutine print_sparse_matrix(rows, cols, values, count)
     implicit none
