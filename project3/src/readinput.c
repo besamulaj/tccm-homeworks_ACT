@@ -6,7 +6,7 @@
 size_t read_Natoms(FILE* input_file) {
     size_t Natoms;
     if (input_file == NULL) {
-        fprint(stderr, "Error: Input file is NULL.\n");
+        fprintf(stderr, "Error: Input file is NULL.\n");
         exit(EXIT_FAILURE);
     }    
     if (fscanf(input_file, "%zu", &Natoms) != 1) {
