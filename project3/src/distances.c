@@ -15,18 +15,7 @@ void compute_distances(size_t Natoms, double** coord, double** distance) {
                 double dz = coord[i][2] - coord[j][2];
                 distance[i][j] = sqrt(dx * dx + dy * dy + dz * dz);
 
-                //check for problems
-                if (distance[i][j] < 1e-10) {
-                    printf("Warning: Small distance detected between atoms %zu and %zu\n", i, j);
-                    distance[i][j] = 1e-10;
-                }
             }
-        }
-    }
-    printf("Computed Distances:\n");
-    for (size_t i = 0; i < Natoms; i++) {
-        for (size_t j = 0; j < Natoms; j++) {
-            printf("Distance[%zu][%zu] = %.10f\n", i, j, distance[i][j]);
         }
     }
 }
