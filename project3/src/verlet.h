@@ -2,8 +2,9 @@
 #define VERLET_H
  
 #include <stdlib.h>
+#include <stdio.h>
  
 // Function to perform Verlet integration step
-void verlet_step(size_t Natoms, double** coord, double** velocity, double** acceleration, double dt);
+void verlet(size_t Natoms, double** coord, double** velocity, double** acceleration, double dt, size_t steps, FILE* output_file);
  
 #endif // VERLET_H
