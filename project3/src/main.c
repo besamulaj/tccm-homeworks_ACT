@@ -1,10 +1,11 @@
-#include "memory.c"         
+#include "memory.h"         
 #include "readinput.h"      
 #include "distances.h"      
 #include "lj_potential.h"  
 #include "energies.h"      
 #include "acceleration.h"   
-#include "verlet.h"     
+#include "verlet.h" 
+#include "functions.h"
 
 #define MAX_STEPS 1000  // total number of steps for the simulation
 #define TIME_STEP 0.2   // time step for the simulation
@@ -39,13 +40,6 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    // Initialize velocities to zero
-    for (size_t i = 0; i < Natoms; i++) {
-        for (int j = 0; j < 3; j++) {
-            velocity[i][j] = 0.0;
-        }
-    }
-
     // Read atomic data from the input file
     read_molecule(input_file, Natoms, coord, mass);
     fclose(input_file);
@@ -56,32 +50,50 @@ int main(int argc, char* argv[]) {
         perror("Error opening output file");
         return EXIT_FAILURE;
     }
-
-    // Compute initial distances
-    compute_distances(Natoms, coord, distance);
-
-    // Compute initial accelerations
-    double epsilon = 0.0661; // Lennard-Jones parameter ε in kJ/mol
-    double sigma = 0.3345;   // Lennard-Jones parameter σ in nm
-    compute_acc(Natoms, coord, mass, distance, acceleration, epsilon, sigma);
-
-    // Compute pairwise distances
-    compute_distances(Natoms, coord, distance);
+    FILE* energy_file = fopen("energy.dat", "w");
+    if (!energy_file) {
+        perror("Error opening energy file");
+        return EXIT_FAILURE;
+    }
+    fprintf(energy_file, "# Step\tKinetic Energy\tPotential Energy\tTotal Energy\n");
  
-    // Compute potential energy
-    double potential_energy = V(EPSILON, SIGMA, Natoms, distance);
+    // Print initial message
+    printf("Starting Molecular Dynamics simulation with %zu atoms...\n", Natoms);
  
-    // Compute kinetic energy
-    double kinetic_energy = T(Natoms, velocity, mass);
+    for (int step = 0; step < MAX_STEPS; step++) {
+        // Compute initial distances
+        compute_distances(Natoms, coord, distance);
+        
+        // Compute potential energy
+        double potential_energy = V(EPSILON, SIGMA, Natoms, distance);
  
-    // Check if the total energy is conserved
-    double total_energy = potential_energy + kinetic_energy;
+        // Compute kinetic energy
+        double kinetic_energy = T(Natoms, velocity, mass);
  
-    // Compute accelerations
-    compute_acc(Natoms, coord, mass, distance, acceleration, EPSILON, SIGMA);
+        // Check if the total energy is conserved
+        double total_energy = potential_energy + kinetic_energy;
 
-    // Run molecular dynamics simulation with Verlet algorithm
-    verlet(Natoms, coord, velocity, acceleration, mass, TIME_STEP, MAX_STEPS, output_file);
+        // Write energies to the energy file
+        fprintf(energy_file, "%d\t%.6f\t%.6f\t%.6f\n", step, kinetic_energy, potential_energy, total_energy);
+ 
+        // Print progress every 100 steps
+        if (step % 100 == 0) {
+            printf("Step %d: Kinetic = %.6f, Potential = %.6f, Total = %.6f\n", step, kinetic_energy, potential_energy, total_energy);
+        }
+ 
+        // Write trajectory to output.xyz every 10 steps
+        if (step % 10 == 0) {
+            write_xyz(output_file, coord, Natoms, step, potential_energy, kinetic_energy);
+       
+        // Compute accelerations
+        compute_acc(Natoms, coord, mass, distance, acceleration, EPSILON, SIGMA);
+
+        // Run molecular dynamics simulation with Verlet algorithm
+        verlet(Natoms, coord, velocity, acceleration, mass, TIME_STEP, MAX_STEPS, output_file);
+        
+        }
+
+    }
 
     // Clean up
     fclose(output_file);
@@ -91,7 +103,7 @@ int main(int argc, char* argv[]) {
     free_2d(distance);
     free(mass);
 
-    printf("Simulation complete. Results written to trajectory.xyz\n");
+    printf("Simulation complete. Results written to trajectory.xyz\n and energy.dat.\n");
     return EXIT_SUCCESS;
 }
 
