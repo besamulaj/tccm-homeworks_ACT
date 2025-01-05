@@ -1,4 +1,5 @@
 #include "verlet.h"
+#include <stdio.h>
 
 // Verlet algorithm for molecular dynamics
 void verlet(size_t Natoms, double** coord, double** velocity, double** acceleration, double* mass, double dt, size_t steps, FILE* output_file) {
