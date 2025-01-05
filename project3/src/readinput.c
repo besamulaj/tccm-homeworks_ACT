@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "memory.c" 
+#include "readinput.h" 
 
 //function for reading the number of atoms
 size_t read_Natoms(FILE* input_file) {
@@ -10,9 +10,10 @@ size_t read_Natoms(FILE* input_file) {
         exit(EXIT_FAILURE);
     }    
     if (fscanf(input_file, "%zu", &Natoms) != 1) {
-        fprint(stderr, "Error: Failed to read the number of atoms from the input file.\n");
+        fprintf(stderr, "Error: Failed to read the number of atoms from the input file.\n");
         exit(EXIT_FAILURE);
     }
+    printf("Number of atoms: %zu\n", Natoms);
     return Natoms;
 }
 
@@ -30,8 +31,9 @@ void read_molecule(FILE* input_file, size_t Natoms, double** coord, double* mass
 
     for (size_t i = 0; i < Natoms; i++) {
         if (fscanf(input_file, "%lf %lf %lf %lf", &coord[i][0], &coord[i][1], &coord[i][2], &mass[i]) !=4) {
-            fprint(stderr, "Error: Failed to read data for atom %zu.\n", i);
+            fprintf(stderr, "Error: Failed to read data for atom %zu.\n", i);
             exit(EXIT_FAILURE);
         }
+        printf("Atom %zu: %.3f %.3f %.3f %.3f\n", i, coord[i][0], coord[i][1], coord[i][2], mass[i]); 
     }
 }
