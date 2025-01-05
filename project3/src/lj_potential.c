@@ -1,5 +1,4 @@
 #include <math.h>
-#include <stdlib.h>
 #include "lj_potential.h"
  
 double V(double EPSILON, double SIGMA, size_t Natoms, double** distance) {
