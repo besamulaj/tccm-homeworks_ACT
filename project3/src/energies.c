@@ -1,4 +1,4 @@
-#include "energy.h"
+#include "energies.h"
  
 double T(size_t Natoms, double** velocity, double* mass) {
     double kinetic_energy = 0.0;
