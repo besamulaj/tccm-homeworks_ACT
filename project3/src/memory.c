@@ -1,31 +1,26 @@
+#include "memory.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-// Allocate a 2D array
-double** malloc_2d(size_t m, size_t n) {
-    double** a = malloc(m * sizeof(double*)); 
-    if (a==NULL) {
-        fprintf(stderr, "Error: Unable to allocate memory for 2D array pointers.\n");
-        return NULL;
-    }
-//Allocate a contiguous block of memory for the elements of 2D array
-    a[0] = malloc(m * n * sizeof(double));
-    if (a[0] ==NULL) {
-        fprintf(stderr, "Error: Unable to allocate memory for 2D array data.\n");
-        free(a);
+double** malloc_2d(size_t rows, size_t cols) {
+    double** array = malloc(rows * sizeof(double*));
+    if (array == NULL) {
         return NULL;
     }
 
-    //pointers to each row
-    for (size_t i = 1; i < m; i++) {
-        a[i] = a[i - 1] + n;
+    array[0] = malloc(rows * cols * sizeof(double));
+    if (array[0] == NULL) {
+        free(array);
+        return NULL;
     }
-    return a;
+
+    for (size_t i = 1; i < rows; i++) {
+        array[i] = array[0] + i * cols;
+    }
+
+    return array;
 }
-//Function to free memory for a 2D array
-void free_2d(double** a) {
-    free(a[0]); //free the contiguous block of memory
-    a[0]= NULL
-    free(a);   //free the array of pointers 
-    
+
+void free_2d(double** array) {
+    free(array[0]);
+    free(array);
 }
