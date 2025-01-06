@@ -10,11 +10,13 @@ Before starting, ensure the following software is installed:
 ### 1. Clone or Copy the project
 Ensure all project files, including source code, test files, and input files, are in a single directory.
 
-### 2. Compile the Program
-To compile the program, open a terminal and navigate to the project directory. Run the following command:
+### 2. Compile the Program 
+2.1. To compile the program, open a terminal and navigate to the project directory. Run the following command:
 bash
 gcc -o md_simulation main.c memory.c readinput.c distances.c lj_potential.c energies.c acceleration.c verlet.c -lm
-This will generate an executable named md_simulation.
+- This will generate an executable named md_simulation.
+
+2.2. To compile program --> use makefile(will be written..)
 
 ### 3. Run the Program
 Run the program with an input file:
