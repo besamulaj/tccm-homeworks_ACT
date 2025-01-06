@@ -1,7 +1,7 @@
 # Installation Guide
 This document provides instructions on how to compile and run the molecular dynamics simulation program.
 
-## Prerequisites
+## Prerequisites:
 Before starting, ensure the following software is installed:
 - **GCC Compiler** (or another C compiler)
 - **Gnuplot** (if you want to visualize energy data)
