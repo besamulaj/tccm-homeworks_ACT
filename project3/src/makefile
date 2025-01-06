@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
  
 # Source and object files
-SRC = acceleration.c distance.c energy.c main.c potential.c readinput.c utils.c verlet.c
+SRC = acceleration.c distances.c energies.c main.c lj_potential.c readinput.c memory.c verlet.c
 OBJ = $(SRC:.c=.o)
 EXEC = md_simulation
  
