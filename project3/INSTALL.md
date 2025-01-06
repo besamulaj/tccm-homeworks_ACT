@@ -5,7 +5,6 @@ This document provides instructions on how to compile and run the molecular dyna
 ## Prerequisites
 Before starting, ensure the following software is installed:
 - **GCC Compiler** (or another C compiler)
-- **GNU Make** (optional but recommended for automation)
 - **Gnuplot** (if you want to visualize energy data)
 
 ## Steps to Compile and Run
@@ -15,4 +14,52 @@ Ensure all project files, including source code, test files, and input files, ar
 
 ### 2. Compile the Program
 
-will continue..
+To compile the program, open a terminal and navigate to the project directory. Run the following command:
+```bash
+gcc -o md_simulation main.c memory.c readinput.c distances.c lj_potential.c energies.c acceleration.c verlet.c -lm
+This will generate an executable named md_simulation.
+
+### 3. Run the Program
+Run the program with an input file:
+./md_simulation inp.txt
+The program will generate an output file named trajectory.xyz containing the results of the simulation.
+
+### 4. Test the Program
+To verify the program's functionality, run the provided test cases:
+gcc -o tests/test tests/test.c memory.c readinput.c distances.c lj_potential.c energies.c acceleration.c -lm
+./tests/test
+If all tests pass, you’ll see the message: All tests passed.
+
+### 5. Visualize the Results
+If you have Gnuplot installed, you can visualize the energy values from the output file (trajectory.xyz):
+  1) Extract the energy data into a new file:
+ grep "Step" trajectory2.xyz | awk -F'|' '{
+    step=$1;
+    ke=$3;
+    pe=$2;
+    gsub("Step ", "", step);
+    gsub("Kinetic Energy: ", "", ke);
+    gsub("Potential Energy: ", "", pe);
+    total_energy=sprintf("%.5f", ke + pe);
+    print step, ke, pe, total_energy
+}' > formatted_energy_data.txt
+
+The command will generate new file formatted_energy_data.txt including Step, Kinetic Energy, Potential Energy and Total Energy in each column.
+
+  2) Open Gnuplot: command: gnuplot
+
+  3) Plot the energy data:
+set title "Energy vs Steps"
+set xlabel "Steps"
+set ylabel "Energy"
+plot "energy_data.txt" using 1:2 with lines title "Kinetic Energy", \
+     "energy_data.txt" using 1:3 with lines title "Potential Energy", \
+     "energy_data.txt" using 1:4 with lines title "Total Energy"
+
+  4) Save the plot (Optional): Before the plot command, use following command to save the plot as a .png file:
+set terminal pngcairo size 800,600 enhanced font 'Arial,12'
+set output "energy_plot.png"
+
+
+
+
