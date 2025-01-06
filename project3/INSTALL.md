@@ -37,6 +37,8 @@ Run the program with an input file:
 
 The program will generate an output file named trajectory.xyz containing the results of the simulation.
 
+-----
+
 ### 4. Test the Program
 To verify the program's functionality, run the provided test cases:
 
@@ -44,6 +46,8 @@ To verify the program's functionality, run the provided test cases:
 ./tests/test*
 
 If all tests pass, you’ll see the message: All tests passed.
+
+-----
 
 ### 5. Visualize the Results
 If you have Gnuplot installed, you can visualize the energy values from the output file (trajectory.xyz):
