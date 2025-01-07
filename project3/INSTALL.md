@@ -64,9 +64,9 @@ If you have Gnuplot installed, you can visualize the energy values from the outp
     gsub("Potential Energy: ", "", pe);
     total_energy=sprintf("%.5f", ke + pe);
     print step, ke, pe, total_energy
-}' > formatted_energy_data.txt*
+}' > energy_data.txt*
 
-The command will generate new file formatted_energy_data.txt including Step, Kinetic Energy, Potential Energy and Total Energy in each column.
+The command will generate new file energy_data.txt including Step, Kinetic Energy, Potential Energy and Total Energy in each column.
 
   #### Step 2.
   Open Gnuplot (command: **gnuplot**)
