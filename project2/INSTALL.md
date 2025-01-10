@@ -21,10 +21,10 @@ Ensure all project files, including source code, Makefile, and input matrix file
 #### Option 1: Manual Compilation
 To manually compile the program, navigate to the project directory and run the following command in bash:
 
-gfortran -O2 -std=legacy -ffree-line-length-none -o MATRIX_APP \
+*gfortran -O2 -std=legacy -ffree-line-length-none -o MATRIX_APP \
     performance_analysis.f90 profiling_analysis.f90 scaling_analysis.f90 timing_analysis.f90 \
     read_sparse_matrix.f90 sparse_to_dense.f90 multiply_sparse_matrix.f90 multiply_dense_matrix.f90 \
-    main.f90
+    main.f90*
 
 This will generate an executable named MATRIX_APP.
 
@@ -37,9 +37,7 @@ In case we have build artifacts, we clean them up first by **make clean** comman
 ### 3. Run the Program
 Run the program with an input file:
 
-*./md_simulation inp.txt*
-
-The program will generate an output file named trajectory.xyz containing the results of the simulation.
+*./MATRIX_APP*
 
 -----
 
